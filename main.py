@@ -52,20 +52,40 @@ class Revista(Item_biblioteca):
     def retirar(self):
         if self.disponivel == True:
             self.disponivel = False
-            return f'A revista {self.titulo} foi retirada'
+            return f'A revista {self.titulo} foi retirada.'
         else:
-            return f'A revista {self.titulo} não está disponível'
+            return f'A revista {self.titulo} não está disponível.'
     
     def devolver(self):
         if self.disponivel == False:
             self.disponivel = True
             return f'A revista {self.titulo} foi devolvida.'
         else:
-            return f'A revista {self.titulo} já foi devolvida'
-class DVD(Item_biblioteca):
-    pass
+            return f'A revista {self.titulo} já foi devolvida.'
 
-livro = Livro('Capitães da Areia', '1929', True, 'Jorge Amado', 232)
-print(livro.retirar())
-revista = Revista('National Geographic', '2024', True, 'National Geographic Society', 'Edição 305')
-print(revista.retirar())
+class DVD(Item_biblioteca):
+    def __init__(self, titulo, ano, disponivel, diretor, duracao_mins):
+        super().__init__(titulo, ano, disponivel)
+        self.diretor = diretor
+        self.duracao_mins = duracao_mins
+    
+    def info(self):
+        return f"""Título: {self.titulo}
+        Ano: {self.ano}
+        Disponibilidade: {self.disponivel}
+        Diretor: {self.diretor}
+        Duração em minutos: {self.duracao_mins}"""
+    
+    def retirar(self):
+        if self.disponivel == True:
+            self.disponivel = False
+            return f'O DVD {self.titulo} foi retirado.'
+        else:
+            return f'O DVD {self.titulo} não está disponível.'
+    
+    def devolver(self):
+        if self.disponivel == False:
+            self.disponivel = True
+            return f'O DVD {self.titulo} foi devolvido.'
+        else:
+            return f'O DVD {self.titulo} já foi devolvido.'
