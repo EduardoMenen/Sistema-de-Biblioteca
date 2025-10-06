@@ -21,11 +21,51 @@ class Livro(Item_biblioteca):
         Disponibilidade: {self.disponivel}
         Autor: {self.autor}
         Número de páginas {self.n_paginas}"""
+    
+    def retirar(self):
+        if self.disponivel == True:
+            self.disponivel = False
+            return f'O livro {self.titulo} foi retirado.'
+        else:
+            return f'O livro {self.titulo} não está disponível.'
+    
+    def devolver(self):
+        if self.disponivel == False:
+            self.disponivel = True
+            return f'O livro {self.titulo} foi devolvido.'
+        else:
+            return f'O livro {self.titulo} já foi devolvido.'
 
 class Revista(Item_biblioteca):
-    pass
+    def __init__(self, titulo, ano, disponivel, edicao, editora):
+        super().__init__(titulo, ano, disponivel)
+        self.edicao = edicao
+        self.editora = editora
+    
+    def info(self):
+        return f"""Título: {self.titulo}
+        Ano: {self.ano}
+        Disponibilidade: {self.disponivel}
+        Edição: {self.edicao}
+        Editora: {self.editora}"""
+    
+    def retirar(self):
+        if self.disponivel == True:
+            self.disponivel = False
+            return f'A revista {self.titulo} foi retirada'
+        else:
+            return f'A revista {self.titulo} não está disponível'
+    
+    def devolver(self):
+        if self.disponivel == False:
+            self.disponivel = True
+            return f'A revista {self.titulo} foi devolvida.'
+        else:
+            return f'A revista {self.titulo} já foi devolvida'
 class DVD(Item_biblioteca):
     pass
 
-livro = Livro('Capitães da Areia', '1929', 'Ocupado', 'Jorge Amado', 232)
-print(livro.info())
+livro = Livro('Capitães da Areia', '1929', True, 'Jorge Amado', 232)
+print(livro.retirar())
+revista = Revista('National Geographic', '2024', True, 'National Geographic Society', 'Edição 305')
+print(revista.retirar())
