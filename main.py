@@ -6,12 +6,26 @@ class Item_biblioteca(ABC):
         self.disponivel = disponivel
 
     @abstractmethod
-    def info():
+    def info(self):
         pass
 
 class Livro(Item_biblioteca):
-    pass
+    def __init__(self, titulo, ano, disponivel, autor, n_paginas):
+        super().__init__(titulo, ano, disponivel)
+        self.autor = autor
+        self.n_paginas = n_paginas
+        
+    def info(self):
+        return f"""Título: {self.titulo}
+        Ano: {self.ano}
+        Disponibilidade: {self.disponivel}
+        Autor: {self.autor}
+        Número de páginas {self.n_paginas}"""
+
 class Revista(Item_biblioteca):
     pass
 class DVD(Item_biblioteca):
     pass
+
+livro = Livro('Capitães da Areia', '1929', 'Ocupado', 'Jorge Amado', 232)
+print(livro.info())
